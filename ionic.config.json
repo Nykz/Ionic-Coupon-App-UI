@@ -1,0 +1,7 @@
+{
+  "name": "coupon-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

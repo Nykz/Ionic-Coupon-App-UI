@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Apply Coupon
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+
+  <div *ngFor="let coupon of coupons">
+
+    <ion-card>
+
+      <ion-row>
+
+        <ion-col 
+          size="1" 
+          class="ion-text-center offer" 
+          [ngClass]="{'amtSaved' : coupon?.saved >= 0, 'amtInsufficient' : coupon?.saved < 0}">
+
+          <ion-label>
+            <strong>
+              {{coupon?.isPercentage ? (coupon?.discount + '% OFF') : (currency + coupon?.discount + ' OFF')}}
+            </strong>
+          </ion-label>
+
+          <div class="circle1"></div>
+          <div class="circle2"></div>
+          <div class="circle3"></div>
+          <div class="circle4"></div>
+
+        </ion-col>
+
+        <ion-col size="11">
+
+          <ion-item lines="none">
+            <ion-label>
+              {{coupon?.code}}
+              <p>
+                <ion-text [color]="coupon?.saved >= 0 ? 'success' : 'medium'">
+                  {{coupon?.saved >= 0 ? ('Save ' + currency + coupon?.saved + ' on this order') : ('Add ' + currency + ((-1) * coupon?.saved) + ' more to avail this offer')}}
+                </ion-text>
+              </p>
+            </ion-label>
+            <ion-button
+              fill="clear"
+              slot="end"
+              [color]="coupon?.saved >= 0 ? 'danger' : 'medium'"
+              [strong]="true"
+              [disabled]="coupon?.saved < 0">
+              APPLY
+            </ion-button>
+          </ion-item>
+
+          <ion-row class="ion-margin-top">
+            <ion-col size="12">
+              <div>
+                {{coupon?.description}} 
+                {{coupon?.minimumOrderAmount ? (' on orders above ' + currency + coupon?.minimumOrderAmount) : ' on all orders'}}. 
+                {{coupon?.upto_discount ? (' Maximum discount ' + currency + coupon.upto_discount) : ''}}
+              </div>
+            </ion-col>
+            <ion-col size="12">
+              <ion-button [strong]="true" fill="clear" size="small">
+                <ion-icon name="add" slot="start"></ion-icon>
+                MORE
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+        </ion-col>
+
+      </ion-row>
+
+    </ion-card>
+
+  </div>
+
+</ion-content>
